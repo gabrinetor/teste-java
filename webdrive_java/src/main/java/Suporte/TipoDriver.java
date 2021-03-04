@@ -6,5 +6,4 @@ public enum TipoDriver {
     FIREFOX,
     IE,
     HEADLESS;
-
 }

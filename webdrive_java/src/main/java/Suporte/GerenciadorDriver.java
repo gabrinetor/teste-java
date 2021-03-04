@@ -1,7 +1,6 @@
 package Suporte;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,11 +15,12 @@ public class GerenciadorDriver {
 
     private static WebDriver driver;
 
-    private static WebDriver pegarGerenciadorDriver(TipoDriver navegador) { //getDriver
+    private static WebDriver pegarGerenciadorDriver(TipoDriver navegador){
 
-        switch (navegador) {
+        switch (navegador){
 
             case CHROME:
+
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions opcoesChrome = new ChromeOptions();
                 opcoesChrome.addArguments("--start-maximized");
@@ -29,15 +29,16 @@ public class GerenciadorDriver {
                 break;
 
             case FIREFOX:
+
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions opcoesFirefox = new FirefoxOptions();
                 opcoesFirefox.addArguments("--incognito");
                 opcoesFirefox.addArguments("--window-size=1920,1080");
-
                 driver = new FirefoxDriver(opcoesFirefox);
                 break;
 
             case HEADLESS:
+
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions headless = new ChromeOptions();
                 headless.addArguments("--headless");
@@ -45,6 +46,7 @@ public class GerenciadorDriver {
                 break;
 
             case IE:
+
                 WebDriverManager.iedriver().setup();
                 MutableCapabilities capacidades = new MutableCapabilities();
                 capacidades.setCapability(CapabilityType.BROWSER_NAME, BrowserType.IE);
@@ -62,17 +64,22 @@ public class GerenciadorDriver {
 
     public static WebDriver pegarDriver(TipoDriver navegador){
 
-        if (driver == null){
+        if(driver == null){
+
             driver = pegarGerenciadorDriver(navegador);
         }
+
         return driver;
+
     }
 
-    public static void encerrarDriver() {
+    public static void encerrarDriver(){
 
         if (driver != null) {
+
             driver.quit();
             driver = null;
         }
+
     }
 }
